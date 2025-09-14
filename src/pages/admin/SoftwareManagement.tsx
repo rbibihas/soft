@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AdminLayout } from '../../components/admin/AdminLayout';
+import { AddSoftwareModal } from '../../components/admin/AddSoftwareModal';
 import { useAdmin } from '../../contexts/AdminContext';
 import { 
   Plus, 
@@ -190,6 +191,16 @@ export const SoftwareManagement: React.FC = () => {
             <p className="text-gray-400 text-lg">No software found matching your criteria.</p>
           </div>
         )}
+
+        {/* Add/Edit Modal */}
+        <AddSoftwareModal
+          isOpen={showAddModal || editingSoftware !== null}
+          onClose={() => {
+            setShowAddModal(false);
+            setEditingSoftware(null);
+          }}
+          editingSoftware={editingSoftware}
+        />
       </div>
     </AdminLayout>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAdmin } from '../../contexts/AdminContext';
 import { 
   LayoutDashboard, 
   Package, 
@@ -8,11 +9,13 @@ import {
   BarChart3, 
   Users, 
   Download,
-  ArrowLeft
+  ArrowLeft,
+  LogOut
 } from 'lucide-react';
 
 export const AdminSidebar: React.FC = () => {
   const location = useLocation();
+  const { logout } = useAdmin();
   
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -74,6 +77,13 @@ export const AdminSidebar: React.FC = () => {
 
       {/* Footer */}
       <div className="p-4 border-t border-gray-800">
+        <button
+          onClick={logout}
+          className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors mb-4"
+        >
+          <LogOut className="w-5 h-5" />
+          <span className="font-medium">Logout</span>
+        </button>
         <div className="text-xs text-gray-500 text-center">
           Admin Dashboard v1.0
         </div>

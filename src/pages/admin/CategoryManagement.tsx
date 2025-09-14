@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AdminLayout } from '../../components/admin/AdminLayout';
+import { AddCategoryModal } from '../../components/admin/AddCategoryModal';
 import { useAdmin } from '../../contexts/AdminContext';
 import { Plus, Edit, Trash2, FolderOpen } from 'lucide-react';
 import * as Icons from 'lucide-react';
@@ -99,6 +100,16 @@ export const CategoryManagement: React.FC = () => {
             </button>
           </div>
         )}
+
+        {/* Add/Edit Modal */}
+        <AddCategoryModal
+          isOpen={showAddModal || editingCategory !== null}
+          onClose={() => {
+            setShowAddModal(false);
+            setEditingCategory(null);
+          }}
+          editingCategory={editingCategory}
+        />
       </div>
     </AdminLayout>
   );

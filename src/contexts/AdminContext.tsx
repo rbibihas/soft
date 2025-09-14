@@ -3,6 +3,9 @@ import { Software, Category } from '../types';
 import { software as initialSoftware, categories as initialCategories } from '../data/mockData';
 
 interface AdminContextType {
+  isAuthenticated: boolean;
+  login: (username: string, password: string) => boolean;
+  logout: () => void;
   software: Software[];
   categories: Category[];
   addSoftware: (software: Software) => void;
@@ -42,9 +45,23 @@ const defaultSettings: AppSettings = {
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [software, setSoftware] = useState<Software[]>(initialSoftware);
   const [categories, setCategories] = useState<Category[]>(initialCategories);
   const [settings, setSettings] = useState<AppSettings>(defaultSettings);
+
+  const login = (username: string, password: string): boolean => {
+    // Simple demo authentication - in real app, this would be API call
+    if (username === 'admin' && password === 'admin123') {
+      setIsAuthenticated(true);
+      return true;
+    }
+    return false;
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+  };
 
   const addSoftware = (newSoftware: Software) => {
     setSoftware(prev => [...prev, newSoftware]);
@@ -78,6 +95,9 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   return (
     <AdminContext.Provider value={{
+      isAuthenticated,
+      login,
+      logout,
       software,
       categories,
       addSoftware,
