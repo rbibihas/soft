@@ -11,7 +11,7 @@ interface AddCategoryModalProps {
 }
 
 const availableIcons = [
-  'Gamepad2', 'Briefcase', 'Video', 'Code2', 'ShieldCheck', 'Wrench',
+  'Folder', 'Gamepad2', 'Briefcase', 'Video', 'Code2', 'ShieldCheck', 'Wrench',
   'Music', 'Camera', 'Palette', 'Database', 'Globe', 'Smartphone',
   'Laptop', 'Monitor', 'Headphones', 'Mic', 'Settings', 'Tool'
 ];
@@ -95,7 +95,7 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
             <label className="block text-sm font-medium text-gray-300 mb-4">Select Icon</label>
             <div className="grid grid-cols-6 gap-3">
               {availableIcons.map((iconName) => {
-                const IconComponent = (Icons as any)[iconName];
+                const IconComponent = (Icons as any)[iconName] || Icons.Folder;
                 const isSelected = formData.icon === iconName;
                 
                 return (
