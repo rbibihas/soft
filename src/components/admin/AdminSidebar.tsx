@@ -10,7 +10,7 @@ import {
   Users, 
   Download,
   ArrowLeft,
-  LogOut
+  LogOut,
   Search,
   Palette,
   Menu,
