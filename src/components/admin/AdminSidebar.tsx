@@ -14,7 +14,7 @@ import {
   Search,
   Palette,
   Menu,
-  User
+  User,
 } from 'lucide-react';
 
 export const AdminSidebar: React.FC = () => {
