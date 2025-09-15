@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAdmin } from '../../contexts/AdminContext';
 import { X } from 'lucide-react';
 import * as Icons from 'lucide-react';
@@ -23,10 +23,22 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
 }) => {
   const { addCategory, updateCategory } = useAdmin();
   const [formData, setFormData] = useState({
-    name: editingCategory?.name || '',
-    description: editingCategory?.description || '',
-    icon: editingCategory?.icon || 'Folder'
+    name: '',
+    description: '',
+    icon: 'Folder'
   });
+
+  useEffect(() => {
+    if (editingCategory) {
+      setFormData({
+        name: editingCategory.name,
+        description: editingCategory.description,
+        icon: editingCategory.icon
+      });
+    } else {
+      setFormData({ name: '', description: '', icon: 'Folder' });
+    }
+  }, [editingCategory]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +58,6 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
     }
 
     onClose();
-    setFormData({ name: '', description: '', icon: 'Folder' });
   };
 
   if (!isOpen) return null;

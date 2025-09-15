@@ -9,7 +9,9 @@ import {
   Users, 
   Star,
   Calendar,
-  Activity
+  Activity,
+  ArrowUp,
+  ArrowDown
 } from 'lucide-react';
 
 export const AdminDashboard: React.FC = () => {
@@ -25,28 +27,32 @@ export const AdminDashboard: React.FC = () => {
       value: software.length,
       icon: Package,
       color: 'from-blue-500 to-blue-600',
-      change: '+12%'
+      change: '+12%',
+      trend: 'up'
     },
     {
       title: 'Categories',
       value: categories.length,
       icon: FolderOpen,
       color: 'from-green-500 to-green-600',
-      change: '+5%'
+      change: '+5%',
+      trend: 'up'
     },
     {
       title: 'Total Downloads',
       value: totalDownloads.toLocaleString(),
       icon: Download,
       color: 'from-purple-500 to-purple-600',
-      change: '+23%'
+      change: '+23%',
+      trend: 'up'
     },
     {
       title: 'Average Rating',
       value: averageRating.toFixed(1),
       icon: Star,
       color: 'from-yellow-500 to-yellow-600',
-      change: '+0.2'
+      change: '+0.2',
+      trend: 'up'
     }
   ];
 
@@ -63,13 +69,18 @@ export const AdminDashboard: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
+            const TrendIcon = stat.trend === 'up' ? ArrowUp : ArrowDown;
+            const trendColor = stat.trend === 'up' ? 'text-green-400' : 'text-red-400';
             return (
-              <div key={index} className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+              <div key={index} className="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:shadow-lg">
                 <div className="flex items-center justify-between mb-4">
                   <div className={`bg-gradient-to-r ${stat.color} p-3 rounded-lg`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <span className="text-green-400 text-sm font-medium">{stat.change}</span>
+                  <div className={`flex items-center space-x-1 ${trendColor} text-sm font-medium`}>
+                    <TrendIcon className="w-4 h-4" />
+                    <span>{stat.change}</span>
+                  </div>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-1">{stat.value}</h3>
                 <p className="text-gray-400 text-sm">{stat.title}</p>

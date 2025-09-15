@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAdmin } from '../../contexts/AdminContext';
-import { X, Upload, Plus, Trash2 } from 'lucide-react';
+import { X, Upload, Plus, Trash2, FileText } from 'lucide-react';
 import { Software } from '../../types';
 
 interface AddSoftwareModalProps {
@@ -16,25 +16,54 @@ export const AddSoftwareModal: React.FC<AddSoftwareModalProps> = ({
 }) => {
   const { categories, addSoftware, updateSoftware } = useAdmin();
   const [formData, setFormData] = useState<Partial<Software>>({
-    title: editingSoftware?.title || '',
-    category: editingSoftware?.category || categories[0]?.id || '',
-    description: editingSoftware?.description || '',
-    fullDescription: editingSoftware?.fullDescription || '',
-    version: editingSoftware?.version || '',
-    size: editingSoftware?.size || '',
-    developer: editingSoftware?.developer || '',
-    releaseDate: editingSoftware?.releaseDate || new Date().toISOString().split('T')[0],
-    requirements: editingSoftware?.requirements || [''],
-    features: editingSoftware?.features || [''],
-    screenshots: editingSoftware?.screenshots || [],
-    image: editingSoftware?.image || '',
-    downloadUrl: editingSoftware?.downloadUrl || '#',
-    rating: editingSoftware?.rating || 4.0,
-    downloads: editingSoftware?.downloads || 0,
-    tags: editingSoftware?.tags || ['']
+    title: '',
+    category: categories[0]?.id || '',
+    description: '',
+    fullDescription: '',
+    version: '',
+    size: '',
+    developer: '',
+    releaseDate: new Date().toISOString().split('T')[0],
+    requirements: [''],
+    features: [''],
+    screenshots: [],
+    image: '',
+    downloadUrl: '#',
+    rating: 4.0,
+    downloads: 0,
+    tags: ['']
   });
 
-  const [imagePreview, setImagePreview] = useState<string>(editingSoftware?.image || '');
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const [downloadFiles, setDownloadFiles] = useState<File[]>([]);
+
+  useEffect(() => {
+    if (editingSoftware) {
+      setFormData(editingSoftware);
+      setImagePreview(editingSoftware.image);
+    } else {
+      setFormData({
+        title: '',
+        category: categories[0]?.id || '',
+        description: '',
+        fullDescription: '',
+        version: '',
+        size: '',
+        developer: '',
+        releaseDate: new Date().toISOString().split('T')[0],
+        requirements: [''],
+        features: [''],
+        screenshots: [],
+        image: '',
+        downloadUrl: '#',
+        rating: 4.0,
+        downloads: 0,
+        tags: ['']
+      });
+      setImagePreview('');
+      setDownloadFiles([]);
+    }
+  }, [editingSoftware, categories]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -47,6 +76,15 @@ export const AddSoftwareModal: React.FC<AddSoftwareModalProps> = ({
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleDownloadFilesUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    setDownloadFiles(prev => [...prev, ...files]);
+  };
+
+  const removeDownloadFile = (index: number) => {
+    setDownloadFiles(prev => prev.filter((_, i) => i !== index));
   };
 
   const handleArrayChange = (field: 'requirements' | 'features' | 'tags', index: number, value: string) => {
@@ -116,7 +154,6 @@ export const AddSoftwareModal: React.FC<AddSoftwareModalProps> = ({
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Basic Info */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">Title</label>
               <input
@@ -234,6 +271,38 @@ export const AddSoftwareModal: React.FC<AddSoftwareModalProps> = ({
                 />
               )}
             </div>
+          </div>
+
+          {/* Download Files Upload */}
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Download Files</label>
+            <input
+              type="file"
+              multiple
+              onChange={handleDownloadFilesUpload}
+              className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-green-600 file:text-white file:cursor-pointer"
+            />
+            {downloadFiles.length > 0 && (
+              <div className="mt-4 space-y-2">
+                <h4 className="text-sm font-medium text-gray-300">Uploaded Files:</h4>
+                {downloadFiles.map((file, index) => (
+                  <div key={index} className="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <FileText className="w-5 h-5 text-blue-400" />
+                      <span className="text-white">{file.name}</span>
+                      <span className="text-gray-400 text-sm">({(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => removeDownloadFile(index)}
+                      className="text-red-400 hover:text-red-300"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Descriptions */}

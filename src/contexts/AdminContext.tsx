@@ -16,6 +16,14 @@ interface AdminContextType {
   deleteCategory: (id: string) => void;
   settings: AppSettings;
   updateSettings: (settings: Partial<AppSettings>) => void;
+  seoSettings: SEOSettings;
+  updateSEOSettings: (settings: Partial<SEOSettings>) => void;
+  appearanceSettings: AppearanceSettings;
+  updateAppearanceSettings: (settings: Partial<AppearanceSettings>) => void;
+  adminProfile: AdminProfile;
+  updateAdminProfile: (profile: Partial<AdminProfile>) => void;
+  menuItems: MenuItem[];
+  updateMenuItems: (items: MenuItem[]) => void;
 }
 
 interface AppSettings {
@@ -28,6 +36,70 @@ interface AppSettings {
   enableSearch: boolean;
   enableRatings: boolean;
   maintenanceMode: boolean;
+  enableComments: boolean;
+  enableNewsletter: boolean;
+  maxFileSize: number;
+  allowedFileTypes: string[];
+  backupFrequency: string;
+  cacheEnabled: boolean;
+  compressionEnabled: boolean;
+  securityLevel: string;
+}
+
+interface SEOSettings {
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
+  googleAnalyticsId: string;
+  googleAdsId: string;
+  facebookPixelId: string;
+  customHeaderCode: string;
+  customFooterCode: string;
+  robotsTxt: string;
+  sitemapEnabled: boolean;
+  structuredDataEnabled: boolean;
+  openGraphEnabled: boolean;
+  twitterCardEnabled: boolean;
+}
+
+interface AppearanceSettings {
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  backgroundColor: string;
+  textColor: string;
+  borderRadius: number;
+  fontSize: number;
+  fontFamily: string;
+  headerHeight: number;
+  sidebarWidth: number;
+  cardSpacing: number;
+  animationSpeed: string;
+  theme: 'dark' | 'light' | 'auto';
+  layout: 'boxed' | 'full-width';
+  headerStyle: 'fixed' | 'static' | 'sticky';
+  sidebarStyle: 'fixed' | 'overlay' | 'push';
+}
+
+interface AdminProfile {
+  name: string;
+  email: string;
+  avatar: string;
+  role: string;
+  loginRedirect: string;
+  twoFactorEnabled: boolean;
+  emailNotifications: boolean;
+  lastLogin: string;
+}
+
+interface MenuItem {
+  id: string;
+  label: string;
+  path: string;
+  icon: string;
+  order: number;
+  visible: boolean;
+  children?: MenuItem[];
 }
 
 const defaultSettings: AppSettings = {
@@ -40,7 +112,71 @@ const defaultSettings: AppSettings = {
   enableSearch: true,
   enableRatings: true,
   maintenanceMode: false,
+  enableComments: false,
+  enableNewsletter: true,
+  maxFileSize: 100,
+  allowedFileTypes: ['.exe', '.msi', '.dmg', '.deb', '.rpm', '.zip', '.rar'],
+  backupFrequency: 'daily',
+  cacheEnabled: true,
+  compressionEnabled: true,
+  securityLevel: 'medium',
 };
+
+const defaultSEOSettings: SEOSettings = {
+  metaTitle: 'SoftwareHub - Download Games & Software',
+  metaDescription: 'Download the latest games, software, and applications safely and securely.',
+  metaKeywords: 'software, games, download, applications, tools',
+  googleAnalyticsId: '',
+  googleAdsId: '',
+  facebookPixelId: '',
+  customHeaderCode: '',
+  customFooterCode: '',
+  robotsTxt: 'User-agent: *\nDisallow: /admin\nAllow: /',
+  sitemapEnabled: true,
+  structuredDataEnabled: true,
+  openGraphEnabled: true,
+  twitterCardEnabled: true,
+};
+
+const defaultAppearanceSettings: AppearanceSettings = {
+  primaryColor: '#3B82F6',
+  secondaryColor: '#8B5CF6',
+  accentColor: '#10B981',
+  backgroundColor: '#111827',
+  textColor: '#F9FAFB',
+  borderRadius: 8,
+  fontSize: 16,
+  fontFamily: 'Inter, system-ui, sans-serif',
+  headerHeight: 64,
+  sidebarWidth: 256,
+  cardSpacing: 24,
+  animationSpeed: '200ms',
+  theme: 'dark',
+  layout: 'full-width',
+  headerStyle: 'sticky',
+  sidebarStyle: 'fixed',
+};
+
+const defaultAdminProfile: AdminProfile = {
+  name: 'Admin User',
+  email: 'admin@softwarehub.com',
+  avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?w=100&h=100&fit=crop&crop=face',
+  role: 'Super Admin',
+  loginRedirect: '/admin',
+  twoFactorEnabled: false,
+  emailNotifications: true,
+  lastLogin: new Date().toISOString(),
+};
+
+const defaultMenuItems: MenuItem[] = [
+  { id: 'home', label: 'Home', path: '/', icon: 'Home', order: 1, visible: true },
+  { id: 'games', label: 'Games', path: '/category/games', icon: 'Gamepad2', order: 2, visible: true },
+  { id: 'productivity', label: 'Productivity', path: '/category/productivity', icon: 'Briefcase', order: 3, visible: true },
+  { id: 'multimedia', label: 'Multimedia', path: '/category/multimedia', icon: 'Video', order: 4, visible: true },
+  { id: 'development', label: 'Development', path: '/category/development', icon: 'Code2', order: 5, visible: true },
+  { id: 'security', label: 'Security', path: '/category/security', icon: 'ShieldCheck', order: 6, visible: true },
+  { id: 'utilities', label: 'Utilities', path: '/category/utilities', icon: 'Wrench', order: 7, visible: true },
+];
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
@@ -49,11 +185,15 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [software, setSoftware] = useState<Software[]>(initialSoftware);
   const [categories, setCategories] = useState<Category[]>(initialCategories);
   const [settings, setSettings] = useState<AppSettings>(defaultSettings);
+  const [seoSettings, setSEOSettings] = useState<SEOSettings>(defaultSEOSettings);
+  const [appearanceSettings, setAppearanceSettings] = useState<AppearanceSettings>(defaultAppearanceSettings);
+  const [adminProfile, setAdminProfile] = useState<AdminProfile>(defaultAdminProfile);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(defaultMenuItems);
 
   const login = (username: string, password: string): boolean => {
-    // Simple demo authentication - in real app, this would be API call
     if (username === 'admin' && password === 'admin123') {
       setIsAuthenticated(true);
+      setAdminProfile(prev => ({ ...prev, lastLogin: new Date().toISOString() }));
       return true;
     }
     return false;
@@ -85,12 +225,27 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const deleteCategory = (id: string) => {
     setCategories(prev => prev.filter(cat => cat.id !== id));
-    // Also remove software in this category
     setSoftware(prev => prev.filter(item => item.category !== id));
   };
 
   const updateSettings = (newSettings: Partial<AppSettings>) => {
     setSettings(prev => ({ ...prev, ...newSettings }));
+  };
+
+  const updateSEOSettings = (newSettings: Partial<SEOSettings>) => {
+    setSEOSettings(prev => ({ ...prev, ...newSettings }));
+  };
+
+  const updateAppearanceSettings = (newSettings: Partial<AppearanceSettings>) => {
+    setAppearanceSettings(prev => ({ ...prev, ...newSettings }));
+  };
+
+  const updateAdminProfile = (newProfile: Partial<AdminProfile>) => {
+    setAdminProfile(prev => ({ ...prev, ...newProfile }));
+  };
+
+  const updateMenuItems = (items: MenuItem[]) => {
+    setMenuItems(items);
   };
 
   return (
@@ -108,6 +263,14 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       deleteCategory,
       settings,
       updateSettings,
+      seoSettings,
+      updateSEOSettings,
+      appearanceSettings,
+      updateAppearanceSettings,
+      adminProfile,
+      updateAdminProfile,
+      menuItems,
+      updateMenuItems,
     }}>
       {children}
     </AdminContext.Provider>

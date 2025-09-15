@@ -13,6 +13,10 @@ import { CategoryManagement } from './pages/admin/CategoryManagement';
 import { AdminSettings } from './pages/admin/AdminSettings';
 import { AdminAnalytics } from './pages/admin/AdminAnalytics';
 import { AdminUsers } from './pages/admin/AdminUsers';
+import { SEOManagement } from './pages/admin/SEOManagement';
+import { AppearanceSettings } from './pages/admin/AppearanceSettings';
+import { MenuManagement } from './pages/admin/MenuManagement';
+import { AdminProfile } from './pages/admin/AdminProfile';
 
 function App() {
   return (
@@ -47,8 +51,12 @@ function App() {
             <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
             <Route path="/admin/software" element={<ProtectedRoute><SoftwareManagement /></ProtectedRoute>} />
             <Route path="/admin/categories" element={<ProtectedRoute><CategoryManagement /></ProtectedRoute>} />
+            <Route path="/admin/seo" element={<ProtectedRoute><SEOManagement /></ProtectedRoute>} />
+            <Route path="/admin/appearance" element={<ProtectedRoute><AppearanceSettings /></ProtectedRoute>} />
+            <Route path="/admin/menu" element={<ProtectedRoute><MenuManagement /></ProtectedRoute>} />
             <Route path="/admin/analytics" element={<ProtectedRoute><AdminAnalytics /></ProtectedRoute>} />
             <Route path="/admin/users" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
+            <Route path="/admin/profile" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
             <Route path="/admin/settings" element={<ProtectedRoute><AdminSettings /></ProtectedRoute>} />
           </Routes>
         </div>

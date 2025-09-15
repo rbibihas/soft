@@ -11,11 +11,15 @@ import {
   Download,
   ArrowLeft,
   LogOut
+  Search,
+  Palette,
+  Menu,
+  User
 } from 'lucide-react';
 
 export const AdminSidebar: React.FC = () => {
   const location = useLocation();
-  const { logout } = useAdmin();
+  const { logout, adminProfile } = useAdmin();
   
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -25,8 +29,12 @@ export const AdminSidebar: React.FC = () => {
     { path: '/admin', icon: LayoutDashboard, label: 'Dashboard', exact: true },
     { path: '/admin/software', icon: Package, label: 'Software Management' },
     { path: '/admin/categories', icon: FolderOpen, label: 'Categories' },
+    { path: '/admin/seo', icon: Search, label: 'SEO Management' },
+    { path: '/admin/appearance', icon: Palette, label: 'Appearance' },
+    { path: '/admin/menu', icon: Menu, label: 'Menu Management' },
     { path: '/admin/analytics', icon: BarChart3, label: 'Analytics' },
     { path: '/admin/users', icon: Users, label: 'Users' },
+    { path: '/admin/profile', icon: User, label: 'Profile' },
     { path: '/admin/settings', icon: Settings, label: 'Settings' },
   ];
 
@@ -40,9 +48,23 @@ export const AdminSidebar: React.FC = () => {
           </div>
           <span className="text-xl font-bold text-white">Admin Panel</span>
         </div>
+        
+        {/* Admin Profile Quick View */}
+        <div className="flex items-center space-x-3 p-3 bg-gray-800 rounded-lg">
+          <img
+            src={adminProfile.avatar}
+            alt="Admin"
+            className="w-8 h-8 rounded-full object-cover"
+          />
+          <div className="flex-1 min-w-0">
+            <p className="text-white text-sm font-medium truncate">{adminProfile.name}</p>
+            <p className="text-gray-400 text-xs truncate">{adminProfile.role}</p>
+          </div>
+        </div>
+        
         <Link 
           to="/" 
-          className="flex items-center text-gray-400 hover:text-white transition-colors text-sm"
+          className="flex items-center text-gray-400 hover:text-white transition-colors text-sm mt-4"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Website
