@@ -17,6 +17,8 @@ import { SEOManagement } from './pages/admin/SEOManagement';
 import { AppearanceSettings } from './pages/admin/AppearanceSettings';
 import { MenuManagement } from './pages/admin/MenuManagement';
 import { AdminProfile } from './pages/admin/AdminProfile';
+import { SectionManagement } from './pages/admin/SectionManagement';
+import { FooterManagement } from './pages/admin/FooterManagement';
 
 function App() {
   return (
@@ -54,6 +56,8 @@ function App() {
             <Route path="/admin/seo" element={<ProtectedRoute><SEOManagement /></ProtectedRoute>} />
             <Route path="/admin/appearance" element={<ProtectedRoute><AppearanceSettings /></ProtectedRoute>} />
             <Route path="/admin/menu" element={<ProtectedRoute><MenuManagement /></ProtectedRoute>} />
+            <Route path="/admin/sections" element={<ProtectedRoute><SectionManagement /></ProtectedRoute>} />
+            <Route path="/admin/footer" element={<ProtectedRoute><FooterManagement /></ProtectedRoute>} />
             <Route path="/admin/analytics" element={<ProtectedRoute><AdminAnalytics /></ProtectedRoute>} />
             <Route path="/admin/users" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
             <Route path="/admin/profile" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />

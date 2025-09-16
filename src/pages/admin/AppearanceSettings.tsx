@@ -107,6 +107,11 @@ export const AppearanceSettings: React.FC = () => {
                 <div className="space-y-6">
                   <h2 className="text-xl font-bold text-white mb-4">Color Scheme</h2>
                   
+                  <div className="bg-blue-900/20 border border-blue-600/30 rounded-lg p-4 mb-6">
+                    <h3 className="text-blue-400 font-medium mb-2">Color Accessibility</h3>
+                    <p className="text-blue-300 text-sm">Ensure sufficient contrast ratios for better accessibility (WCAG 2.1 AA compliance).</p>
+                  </div>
+
                   {/* Color Presets */}
                   <div>
                     <h3 className="text-lg font-semibold text-white mb-3">Quick Presets</h3>
@@ -218,6 +223,99 @@ export const AppearanceSettings: React.FC = () => {
                         />
                       </div>
                     </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Link Hover Color
+                      </label>
+                      <div className="flex items-center space-x-3">
+                        <input
+                          type="color"
+                          className="w-12 h-12 rounded-lg border border-gray-600 bg-gray-700"
+                        />
+                        <input
+                          type="text"
+                          className="flex-1 bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                          placeholder="#60A5FA"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Success Color
+                      </label>
+                      <div className="flex items-center space-x-3">
+                        <input
+                          type="color"
+                          value="#10B981"
+                          className="w-12 h-12 rounded-lg border border-gray-600 bg-gray-700"
+                        />
+                        <input
+                          type="text"
+                          value="#10B981"
+                          className="flex-1 bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Warning Color
+                      </label>
+                      <div className="flex items-center space-x-3">
+                        <input
+                          type="color"
+                          value="#F59E0B"
+                          className="w-12 h-12 rounded-lg border border-gray-600 bg-gray-700"
+                        />
+                        <input
+                          type="text"
+                          value="#F59E0B"
+                          className="flex-1 bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Error Color
+                      </label>
+                      <div className="flex items-center space-x-3">
+                        <input
+                          type="color"
+                          value="#EF4444"
+                          className="w-12 h-12 rounded-lg border border-gray-600 bg-gray-700"
+                        />
+                        <input
+                          type="text"
+                          value="#EF4444"
+                          className="flex-1 bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gray-700 rounded-lg p-6">
+                    <h3 className="text-white font-medium mb-4">Color Palette Preview</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="text-center">
+                        <div className="w-full h-16 rounded-lg mb-2" style={{ backgroundColor: formData.primaryColor }}></div>
+                        <p className="text-white text-sm">Primary</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-full h-16 rounded-lg mb-2" style={{ backgroundColor: formData.secondaryColor }}></div>
+                        <p className="text-white text-sm">Secondary</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-full h-16 rounded-lg mb-2" style={{ backgroundColor: formData.accentColor }}></div>
+                        <p className="text-white text-sm">Accent</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-full h-16 rounded-lg mb-2" style={{ backgroundColor: formData.backgroundColor }}></div>
+                        <p className="text-white text-sm">Background</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
@@ -272,6 +370,20 @@ export const AppearanceSettings: React.FC = () => {
 
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Sidebar Width (px)
+                      </label>
+                      <input
+                        type="number"
+                        min="200"
+                        max="400"
+                        value={formData.sidebarWidth}
+                        onChange={(e) => setFormData({...formData, sidebarWidth: parseInt(e.target.value)})}
+                        className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         Card Spacing (px)
                       </label>
                       <input
@@ -314,6 +426,37 @@ export const AppearanceSettings: React.FC = () => {
                       </select>
                     </div>
                   </div>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-white font-medium">Enable Dark Mode Toggle</h3>
+                        <p className="text-gray-400 text-sm">Allow users to switch between light and dark themes</p>
+                      </div>
+                      <label className="relative inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          className="sr-only peer"
+                        />
+                        <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                      </label>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-white font-medium">Sticky Navigation</h3>
+                        <p className="text-gray-400 text-sm">Keep navigation visible when scrolling</p>
+                      </div>
+                      <label className="relative inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          defaultChecked
+                          className="sr-only peer"
+                        />
+                        <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                      </label>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -322,6 +465,41 @@ export const AppearanceSettings: React.FC = () => {
                   <h2 className="text-xl font-bold text-white mb-4">Typography</h2>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Primary Font Family
+                      </label>
+                      <select
+                        value={formData.fontFamily}
+                        onChange={(e) => setFormData({...formData, fontFamily: e.target.value})}
+                        className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                      >
+                        <option value="Inter, system-ui, sans-serif">Inter</option>
+                        <option value="Roboto, sans-serif">Roboto</option>
+                        <option value="Open Sans, sans-serif">Open Sans</option>
+                        <option value="Poppins, sans-serif">Poppins</option>
+                        <option value="Montserrat, sans-serif">Montserrat</option>
+                        <option value="Lato, sans-serif">Lato</option>
+                        <option value="Source Sans Pro, sans-serif">Source Sans Pro</option>
+                        <option value="Nunito, sans-serif">Nunito</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Heading Font Family
+                      </label>
+                      <select
+                        className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                      >
+                        <option value="inherit">Same as Primary</option>
+                        <option value="Playfair Display, serif">Playfair Display</option>
+                        <option value="Merriweather, serif">Merriweather</option>
+                        <option value="Oswald, sans-serif">Oswald</option>
+                        <option value="Raleway, sans-serif">Raleway</option>
+                      </select>
+                    </div>
+
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-2">
                         Font Family
@@ -352,6 +530,66 @@ export const AppearanceSettings: React.FC = () => {
                         className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
                       />
                     </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Line Height
+                      </label>
+                      <select
+                        className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                      >
+                        <option value="1.2">Tight (1.2)</option>
+                        <option value="1.4">Snug (1.4)</option>
+                        <option value="1.5" selected>Normal (1.5)</option>
+                        <option value="1.6">Relaxed (1.6)</option>
+                        <option value="1.8">Loose (1.8)</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Letter Spacing
+                      </label>
+                      <select
+                        className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                      >
+                        <option value="-0.05em">Tighter</option>
+                        <option value="-0.025em">Tight</option>
+                        <option value="0" selected>Normal</option>
+                        <option value="0.025em">Wide</option>
+                        <option value="0.05em">Wider</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Font Weight Scale
+                    </label>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-xs text-gray-400 mb-1">Light</label>
+                        <select className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                          <option value="300">300</option>
+                          <option value="400">400</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-400 mb-1">Normal</label>
+                        <select className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                          <option value="400" selected>400</option>
+                          <option value="500">500</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-400 mb-1">Bold</label>
+                        <select className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                          <option value="600">600</option>
+                          <option value="700" selected>700</option>
+                          <option value="800">800</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="bg-gray-700 rounded-lg p-6">
@@ -361,6 +599,7 @@ export const AppearanceSettings: React.FC = () => {
                       <h2 className="text-2xl font-semibold text-white">Heading 2</h2>
                       <h3 className="text-xl font-medium text-white">Heading 3</h3>
                       <p className="text-gray-300">This is a paragraph of body text to show how the typography looks with your current settings.</p>
+                      <p className="text-sm text-gray-400">This is smaller text that might be used for captions or metadata.</p>
                     </div>
                   </div>
                 </div>
@@ -373,7 +612,7 @@ export const AppearanceSettings: React.FC = () => {
                   <div className="space-y-6">
                     <div className="bg-gray-700 rounded-lg p-6">
                       <h3 className="text-white font-medium mb-4">Button Styles</h3>
-                      <div className="flex flex-wrap gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
                           Primary Button
                         </button>
@@ -383,6 +622,15 @@ export const AppearanceSettings: React.FC = () => {
                         <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
                           Success Button
                         </button>
+                        <button className="bg-yellow-600 text-white px-6 py-3 rounded-lg hover:bg-yellow-700 transition-colors">
+                          Warning Button
+                        </button>
+                        <button className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors">
+                          Danger Button
+                        </button>
+                        <button className="border border-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
+                          Outline Button
+                        </button>
                       </div>
                     </div>
 
@@ -391,6 +639,27 @@ export const AppearanceSettings: React.FC = () => {
                       <div className="bg-gray-800 rounded-lg p-4 border border-gray-600">
                         <h4 className="text-white font-medium mb-2">Sample Card</h4>
                         <p className="text-gray-300 text-sm">This is how cards will appear with your current settings.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gray-700 rounded-lg p-6">
+                      <h3 className="text-white font-medium mb-4">Form Elements</h3>
+                      <div className="space-y-4">
+                        <input
+                          type="text"
+                          placeholder="Text Input"
+                          className="w-full bg-gray-600 text-white border border-gray-500 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                        />
+                        <select className="w-full bg-gray-600 text-white border border-gray-500 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none">
+                          <option>Select Option</option>
+                          <option>Option 1</option>
+                          <option>Option 2</option>
+                        </select>
+                        <textarea
+                          placeholder="Textarea"
+                          rows={3}
+                          className="w-full bg-gray-600 text-white border border-gray-500 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                        />
                       </div>
                     </div>
                   </div>

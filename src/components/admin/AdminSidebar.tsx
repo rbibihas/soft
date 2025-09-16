@@ -15,6 +15,8 @@ import {
   Palette,
   Menu,
   User,
+  Layout,
+  FileText,
 } from 'lucide-react';
 
 export const AdminSidebar: React.FC = () => {
@@ -32,6 +34,8 @@ export const AdminSidebar: React.FC = () => {
     { path: '/admin/seo', icon: Search, label: 'SEO Management' },
     { path: '/admin/appearance', icon: Palette, label: 'Appearance' },
     { path: '/admin/menu', icon: Menu, label: 'Menu Management' },
+    { path: '/admin/sections', icon: Layout, label: 'Section Management' },
+    { path: '/admin/footer', icon: FileText, label: 'Footer Management' },
     { path: '/admin/analytics', icon: BarChart3, label: 'Analytics' },
     { path: '/admin/users', icon: Users, label: 'Users' },
     { path: '/admin/profile', icon: User, label: 'Profile' },
