@@ -16,6 +16,7 @@ import {
   Github,
   Linkedin,
   Eye,
+  EyeOff,
   Settings
 } from 'lucide-react';
 
