@@ -21,11 +21,13 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
   onClose, 
   editingCategory 
 }) => {
-  const { addCategory, updateCategory } = useAdmin();
+  const { addCategory, updateCategory, categories } = useAdmin();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    icon: 'Folder'
+    icon: 'Folder',
+    parentId: '',
+    type: 'platform' as 'platform' | 'subcategory'
   });
 
   useEffect(() => {
@@ -33,10 +35,18 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
       setFormData({
         name: editingCategory.name,
         description: editingCategory.description,
-        icon: editingCategory.icon
+        icon: editingCategory.icon,
+        parentId: editingCategory.parentId || '',
+        type: editingCategory.type
       });
     } else {
-      setFormData({ name: '', description: '', icon: 'Folder' });
+      setFormData({ 
+        name: '', 
+        description: '', 
+        icon: 'Folder',
+        parentId: '',
+        type: 'platform'
+      });
     }
   }, [editingCategory]);
 
@@ -48,7 +58,9 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
       name: formData.name,
       description: formData.description,
       icon: formData.icon,
-      count: editingCategory?.count || 0
+      parentId: formData.parentId || undefined,
+      type: formData.type,
+      order: editingCategory?.order || categories.length + 1
     };
 
     if (editingCategory) {
@@ -78,6 +90,37 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Category Type</label>
+              <select
+                value={formData.type}
+                onChange={(e) => setFormData({ ...formData, type: e.target.value as 'platform' | 'subcategory' })}
+                className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+              >
+                <option value="platform">Platform (Windows, macOS, Android, iOS)</option>
+                <option value="subcategory">Subcategory (Tools, Games, etc.)</option>
+              </select>
+            </div>
+
+            {formData.type === 'subcategory' && (
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Parent Platform</label>
+                <select
+                  value={formData.parentId}
+                  onChange={(e) => setFormData({ ...formData, parentId: e.target.value })}
+                  className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
+                  required={formData.type === 'subcategory'}
+                >
+                  <option value="">Select Parent Platform</option>
+                  {categories.filter(cat => cat.type === 'platform').map(platform => (
+                    <option key={platform.id} value={platform.id}>{platform.name}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">Category Name</label>
             <input

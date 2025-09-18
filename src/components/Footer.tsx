@@ -40,33 +40,23 @@ export const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold text-white">Categories</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/category/games" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Games
+                <Link to="/category/windows" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Windows Software
                 </Link>
               </li>
               <li>
-                <Link to="/category/productivity" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Productivity
+                <Link to="/category/macos" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  macOS Software
                 </Link>
               </li>
               <li>
-                <Link to="/category/multimedia" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Multimedia
+                <Link to="/category/android-games" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Android Games
                 </Link>
               </li>
               <li>
-                <Link to="/category/development" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Development
-                </Link>
-              </li>
-              <li>
-                <Link to="/category/security" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Security
-                </Link>
-              </li>
-              <li>
-                <Link to="/category/utilities" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Utilities
+                <Link to="/category/ios-games" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  iOS Games
                 </Link>
               </li>
             </ul>

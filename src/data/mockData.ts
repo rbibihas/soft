@@ -1,47 +1,208 @@
 import { Software, Category } from '../types';
 
 export const categories: Category[] = [
+  // Platform Categories
   {
-    id: 'games',
-    name: 'Games',
-    description: 'Latest PC Games & Gaming Software',
-    icon: 'Gamepad2',
-    count: 45
+    id: 'windows',
+    name: 'Windows Software',
+    description: 'Software and applications for Windows operating system',
+    icon: 'Monitor',
+    type: 'platform',
+    order: 1
   },
   {
-    id: 'productivity',
-    name: 'Productivity',
-    description: 'Office & Business Software',
-    icon: 'Briefcase',
-    count: 32
+    id: 'macos',
+    name: 'macOS Software',
+    description: 'Software and applications for macOS operating system',
+    icon: 'Laptop',
+    type: 'platform',
+    order: 2
   },
   {
-    id: 'multimedia',
-    name: 'Multimedia',
-    description: 'Video, Audio & Graphics Tools',
-    icon: 'Video',
-    count: 28
+    id: 'android-games',
+    name: 'Android Games',
+    description: 'Games and entertainment for Android devices',
+    icon: 'Smartphone',
+    type: 'platform',
+    order: 3
   },
   {
-    id: 'development',
-    name: 'Development',
-    description: 'Programming & Development Tools',
-    icon: 'Code2',
-    count: 21
+    id: 'ios-games',
+    name: 'iOS Games',
+    description: 'Games and entertainment for iOS devices',
+    icon: 'Tablet',
+    type: 'platform',
+    order: 4
   },
+  
+  // Windows Subcategories
   {
-    id: 'security',
-    name: 'Security',
-    description: 'Antivirus & Privacy Software',
-    icon: 'ShieldCheck',
-    count: 15
-  },
-  {
-    id: 'utilities',
-    name: 'Utilities',
-    description: 'System & Utility Software',
+    id: 'windows-tools',
+    name: 'Tools & Utilities',
+    description: 'System tools and utility software for Windows',
     icon: 'Wrench',
-    count: 38
+    parentId: 'windows',
+    type: 'subcategory',
+    order: 1
+  },
+  {
+    id: 'windows-security',
+    name: 'Security',
+    description: 'Antivirus and security software for Windows',
+    icon: 'ShieldCheck',
+    parentId: 'windows',
+    type: 'subcategory',
+    order: 2
+  },
+  {
+    id: 'windows-multimedia',
+    name: 'Multimedia',
+    description: 'Video, audio and graphics software for Windows',
+    icon: 'Video',
+    parentId: 'windows',
+    type: 'subcategory',
+    order: 3
+  },
+  {
+    id: 'windows-design',
+    name: 'Design & Graphics',
+    description: 'Design and graphics software for Windows',
+    icon: 'Palette',
+    parentId: 'windows',
+    type: 'subcategory',
+    order: 4
+  },
+  {
+    id: 'windows-development',
+    name: 'Development',
+    description: 'Programming and development tools for Windows',
+    icon: 'Code2',
+    parentId: 'windows',
+    type: 'subcategory',
+    order: 5
+  },
+  {
+    id: 'windows-productivity',
+    name: 'Productivity',
+    description: 'Office and business software for Windows',
+    icon: 'Gamepad2',
+    parentId: 'windows',
+    type: 'subcategory',
+    order: 6
+  },
+  
+  // macOS Subcategories
+  {
+    id: 'macos-tools',
+    name: 'Tools & Utilities',
+    description: 'System tools and utility software for macOS',
+    icon: 'Wrench',
+    parentId: 'macos',
+    type: 'subcategory',
+    order: 1
+  },
+  {
+    id: 'macos-security',
+    name: 'Security',
+    description: 'Security software for macOS',
+    icon: 'ShieldCheck',
+    parentId: 'macos',
+    type: 'subcategory',
+    order: 2
+  },
+  {
+    id: 'macos-multimedia',
+    name: 'Multimedia',
+    description: 'Video, audio and graphics software for macOS',
+    icon: 'Video',
+    parentId: 'macos',
+    type: 'subcategory',
+    order: 3
+  },
+  {
+    id: 'macos-design',
+    name: 'Design & Graphics',
+    description: 'Design and graphics software for macOS',
+    icon: 'Palette',
+    parentId: 'macos',
+    type: 'subcategory',
+    order: 4
+  },
+  {
+    id: 'macos-development',
+    name: 'Development',
+    description: 'Programming and development tools for macOS',
+    icon: 'Code2',
+    parentId: 'macos',
+    type: 'subcategory',
+    order: 5
+  },
+  {
+    id: 'macos-productivity',
+    name: 'Productivity',
+    description: 'Office and business software for macOS',
+    icon: 'Briefcase',
+    parentId: 'macos',
+    type: 'subcategory',
+    order: 6
+  },
+  
+  // Android Games Subcategories
+  {
+    id: 'android-action',
+    name: 'Action Games',
+    description: 'Action and adventure games for Android',
+    icon: 'Zap',
+    parentId: 'android-games',
+    type: 'subcategory',
+    order: 1
+  },
+  {
+    id: 'android-puzzle',
+    name: 'Puzzle Games',
+    description: 'Puzzle and strategy games for Android',
+    icon: 'Puzzle',
+    parentId: 'android-games',
+    type: 'subcategory',
+    order: 2
+  },
+  {
+    id: 'android-racing',
+    name: 'Racing Games',
+    description: 'Racing and sports games for Android',
+    icon: 'Car',
+    parentId: 'android-games',
+    type: 'subcategory',
+    order: 3
+  },
+  
+  // iOS Games Subcategories
+  {
+    id: 'ios-action',
+    name: 'Action Games',
+    description: 'Action and adventure games for iOS',
+    icon: 'Zap',
+    parentId: 'ios-games',
+    type: 'subcategory',
+    order: 1
+  },
+  {
+    id: 'ios-puzzle',
+    name: 'Puzzle Games',
+    description: 'Puzzle and strategy games for iOS',
+    icon: 'Puzzle',
+    parentId: 'ios-games',
+    type: 'subcategory',
+    order: 2
+  },
+  {
+    id: 'ios-racing',
+    name: 'Racing Games',
+    description: 'Racing and sports games for iOS',
+    icon: 'Car',
+    parentId: 'ios-games',
+    type: 'subcategory',
+    order: 3
   }
 ];
 
@@ -49,7 +210,7 @@ export const software: Software[] = [
   {
     id: '1',
     title: 'Cyberpunk 2077',
-    category: 'games',
+    category: 'windows-tools',
     description: 'Open-world action-adventure RPG set in futuristic Night City',
     fullDescription: 'Cyberpunk 2077 is an open-world, action-adventure RPG set in the dark future of Night City — a dangerous megalopolis obsessed with power, glamor, and ceaseless body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality.',
     version: '2.1.0',
@@ -84,7 +245,7 @@ export const software: Software[] = [
   {
     id: '2',
     title: 'Adobe Photoshop 2024',
-    category: 'multimedia',
+    category: 'windows-design',
     description: 'Professional image editing and graphic design software',
     fullDescription: 'Adobe Photoshop is the industry standard for digital image processing and editing, used by photographers, designers, web developers, and creative professionals worldwide.',
     version: '25.0',
@@ -119,7 +280,7 @@ export const software: Software[] = [
   {
     id: '3',
     title: 'Microsoft Office 2024',
-    category: 'productivity',
+    category: 'windows-productivity',
     description: 'Complete productivity suite with Word, Excel, PowerPoint, and more',
     fullDescription: 'Microsoft Office 2024 is the latest version of the world\'s most popular productivity suite, featuring enhanced collaboration tools, AI assistance, and improved performance.',
     version: '16.0',
@@ -154,7 +315,7 @@ export const software: Software[] = [
   {
     id: '4',
     title: 'Visual Studio Code',
-    category: 'development',
+    category: 'windows-development',
     description: 'Lightweight but powerful source code editor',
     fullDescription: 'Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux.',
     version: '1.84.2',
@@ -222,7 +383,7 @@ export const software: Software[] = [
   {
     id: '6',
     title: 'CCleaner Professional',
-    category: 'utilities',
+    category: 'windows-tools',
     description: 'System optimization and privacy cleaning tool',
     fullDescription: 'CCleaner Professional is the premium version of the world\'s most popular PC optimization tool, helping you clean, optimize, and maintain your system.',
     version: '6.17.0',
@@ -256,7 +417,7 @@ export const software: Software[] = [
   {
     id: '7',
     title: 'Spotify Desktop',
-    category: 'multimedia',
+    category: 'windows-multimedia',
     description: 'Music streaming application with offline downloads',
     fullDescription: 'Spotify Desktop brings millions of songs to your computer with high-quality streaming, offline downloads, and personalized playlists.',
     version: '1.2.25',
@@ -290,7 +451,7 @@ export const software: Software[] = [
   {
     id: '8',
     title: 'Discord',
-    category: 'productivity',
+    category: 'windows-productivity',
     description: 'Voice, video and text communication platform for communities',
     fullDescription: 'Discord is a free voice, video, and text chat app used by millions of people to talk and hang out with their communities and friends.',
     version: '1.0.9015',
@@ -324,7 +485,7 @@ export const software: Software[] = [
   {
     id: '9',
     title: 'Steam',
-    category: 'games',
+    category: 'android-action',
     description: 'Digital distribution platform for PC gaming',
     fullDescription: 'Steam is the ultimate destination for playing, discussing, and creating games with millions of players worldwide.',
     version: '3.5.17',
@@ -358,7 +519,7 @@ export const software: Software[] = [
   {
     id: '10',
     title: 'OBS Studio',
-    category: 'multimedia',
+    category: 'macos-multimedia',
     description: 'Free and open source software for video recording and live streaming',
     fullDescription: 'OBS Studio is a powerful tool for content creators, offering professional-grade recording and streaming capabilities.',
     version: '30.0.2',
@@ -392,7 +553,7 @@ export const software: Software[] = [
   {
     id: '11',
     title: 'Figma Desktop',
-    category: 'development',
+    category: 'macos-design',
     description: 'Collaborative interface design tool',
     fullDescription: 'Figma is a collaborative web application for interface design, with additional offline features enabled by the desktop app.',
     version: '116.15.4',
@@ -426,7 +587,7 @@ export const software: Software[] = [
   {
     id: '12',
     title: 'Notion Desktop',
-    category: 'productivity',
+    category: 'macos-productivity',
     description: 'All-in-one workspace for notes, tasks, wikis, and databases',
     fullDescription: 'Notion is a single space where you can think, write, and plan. Capture thoughts, manage projects, or even run an entire company.',
     version: '2.0.30',

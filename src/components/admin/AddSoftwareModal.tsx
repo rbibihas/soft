@@ -173,8 +173,13 @@ export const AddSoftwareModal: React.FC<AddSoftwareModalProps> = ({
                 className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-500 focus:outline-none"
                 required
               >
-                {categories.map(cat => (
-                  <option key={cat.id} value={cat.id}>{cat.name}</option>
+                {categories.filter(cat => cat.type === 'subcategory').map(cat => {
+                  const parent = categories.find(p => p.id === cat.parentId);
+                  return (
+                    <option key={cat.id} value={cat.id}>
+                      {parent?.name} - {cat.name}
+                    </option>
+                  );
                 ))}
               </select>
             </div>

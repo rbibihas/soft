@@ -64,6 +64,23 @@ export const CategoryPage: React.FC = () => {
         {/* Controls */}
         <div className="flex flex-col sm:flex-row items-center justify-between mb-8 space-y-4 sm:space-y-0">
           <div className="flex items-center space-x-4">
+            {/* Subcategory Filter for Platform Categories */}
+            {categoryInfo?.type === 'platform' && subcategories.length > 0 && (
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-400">Subcategory:</span>
+                <select
+                  value={selectedSubcategory}
+                  onChange={(e) => setSelectedSubcategory(e.target.value)}
+                  className="bg-gray-800 text-white border border-gray-700 rounded-lg px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+                >
+                  <option value="all">All Subcategories</option>
+                  {subcategories.map(sub => (
+                    <option key={sub.id} value={sub.id}>{sub.name}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+            
             <div className="flex items-center space-x-2">
               <Filter className="w-4 h-4 text-gray-400" />
               <span className="text-sm text-gray-400">Sort by:</span>

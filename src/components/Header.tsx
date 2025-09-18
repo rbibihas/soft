@@ -30,28 +30,36 @@ export const Header: React.FC = () => {
               Home
             </Link>
             <Link 
-              to="/category/games" 
+              to="/category/windows" 
               className={`text-sm font-medium transition-colors ${
-                isActive('/category/games') ? 'text-blue-400' : 'text-gray-300 hover:text-white'
+                isActive('/category/windows') ? 'text-blue-400' : 'text-gray-300 hover:text-white'
               }`}
             >
-              Games
+              Windows
             </Link>
             <Link 
-              to="/category/productivity" 
+              to="/category/macos" 
               className={`text-sm font-medium transition-colors ${
-                isActive('/category/productivity') ? 'text-blue-400' : 'text-gray-300 hover:text-white'
+                isActive('/category/macos') ? 'text-blue-400' : 'text-gray-300 hover:text-white'
               }`}
             >
-              Productivity
+              macOS
             </Link>
             <Link 
-              to="/category/multimedia" 
+              to="/category/android-games" 
               className={`text-sm font-medium transition-colors ${
-                isActive('/category/multimedia') ? 'text-blue-400' : 'text-gray-300 hover:text-white'
+                isActive('/category/android-games') ? 'text-blue-400' : 'text-gray-300 hover:text-white'
               }`}
             >
-              Multimedia
+              Android Games
+            </Link>
+            <Link 
+              to="/category/ios-games" 
+              className={`text-sm font-medium transition-colors ${
+                isActive('/category/ios-games') ? 'text-blue-400' : 'text-gray-300 hover:text-white'
+              }`}
+            >
+              iOS Games
             </Link>
           </nav>
           

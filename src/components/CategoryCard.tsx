@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Icons from 'lucide-react';
 import { Category } from '../types';
+import { software, categories } from '../data/mockData';
 
 interface CategoryCardProps {
   category: Category;
