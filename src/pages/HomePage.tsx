@@ -8,6 +8,20 @@ export const HomePage: React.FC = () => {
   const featuredSoftware = software.slice(0, 3);
   const recentSoftware = software.slice(3, 9);
 
+  const getCategoryCount = (categoryId: string) => {
+    const category = categories.find(c => c.id === categoryId);
+    if (category?.type === 'platform') {
+      // For platforms, count all software in subcategories
+      return software.filter(item => {
+        const itemCategory = categories.find(cat => cat.id === item.category);
+        return itemCategory?.parentId === categoryId;
+      }).length;
+    } else {
+      // For subcategories, count direct software items
+      return software.filter(item => item.category === categoryId).length;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       {/* Hero Section */}
@@ -49,7 +63,7 @@ export const HomePage: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.filter(cat => cat.type === 'platform').map((category) => (
-              <CategoryCard key={category.id} category={category} />
+              <CategoryCard key={category.id} category={category} count={getCategoryCount(category.id)} />
             ))}
           </div>
         </div>

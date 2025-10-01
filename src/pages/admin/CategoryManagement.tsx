@@ -97,7 +97,7 @@ export const CategoryManagement: React.FC = () => {
                 <h2 className="text-2xl font-bold text-white mb-4">Platforms</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {categories.filter(cat => cat.type === 'platform').map((category) => (
-                    <CategoryCard key={category.id} category={category} />
+                    <CategoryCard key={category.id} category={category} count={getCategoryCount(category.id)} />
                   ))}
                 </div>
               </div>
@@ -112,7 +112,7 @@ export const CategoryManagement: React.FC = () => {
                     <h2 className="text-xl font-bold text-white mb-4">{platform.name} - Subcategories</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {subcategories.map((category) => (
-                        <CategoryCard key={category.id} category={category} />
+                        <CategoryCard key={category.id} category={category} count={getCategoryCount(category.id)} />
                       ))}
                     </div>
                   </div>
@@ -124,7 +124,7 @@ export const CategoryManagement: React.FC = () => {
           {viewMode === 'platforms' && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {categories.filter(cat => cat.type === 'platform').map((category) => (
-                <CategoryCard key={category.id} category={category} />
+                <CategoryCard key={category.id} category={category} count={getCategoryCount(category.id)} />
               ))}
             </div>
           )}
@@ -132,7 +132,7 @@ export const CategoryManagement: React.FC = () => {
           {viewMode === 'subcategories' && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {categories.filter(cat => cat.type === 'subcategory').map((category) => (
-                <CategoryCard key={category.id} category={category} />
+                <CategoryCard key={category.id} category={category} count={getCategoryCount(category.id)} />
               ))}
             </div>
           )}
