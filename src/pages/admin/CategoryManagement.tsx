@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AdminLayout } from '../../components/admin/AdminLayout';
 import { AddCategoryModal } from '../../components/admin/AddCategoryModal';
 import { useAdmin } from '../../contexts/AdminContext';
-import { Plus, Edit, Trash2, FolderOpen } from 'lucide-react';
+import { Plus, CreditCard as Edit, Trash2, FolderOpen } from 'lucide-react';
 import * as Icons from 'lucide-react';
 import { Category } from '../../types';
 
