@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Icons from 'lucide-react';
 import { Category } from '../types';
-import { software, categories } from '../data/mockData';
 
 interface CategoryCardProps {
   category: Category;
+  count: number;
 }
 
-export const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
+export const CategoryCard: React.FC<CategoryCardProps> = ({ category, count }) => {
   const IconComponent = (Icons as any)[category.icon] || Icons.Folder;
 
   return (
@@ -22,7 +22,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
             <h3 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors">
               {category.name}
             </h3>
-            <span className="text-sm text-gray-400">{category.count} items</span>
+            <span className="text-sm text-gray-400">{count} items</span>
           </div>
         </div>
         <p className="text-gray-400 text-sm">
