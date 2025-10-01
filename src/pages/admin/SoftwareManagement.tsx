@@ -2,18 +2,7 @@ import React, { useState } from 'react';
 import { AdminLayout } from '../../components/admin/AdminLayout';
 import AddSoftwareModal from '../../components/admin/AddSoftwareModal';
 import { useAdmin } from '../../contexts/AdminContext';
-import { 
-  Plus, 
-  Search, 
-  Edit, 
-  Trash2, 
-  Eye, 
-  Star, 
-  Download,
-  Filter,
-  Grid,
-  List
-} from 'lucide-react';
+import { Plus, Search, CreditCard as Edit, Trash2, Eye, Star, Download, Filter, Grid2x2 as Grid, List } from 'lucide-react';
 import { Software } from '../../types';
 
 export const SoftwareManagement: React.FC = () => {
