@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AdminLayout } from '../../components/admin/AdminLayout';
-import { AddSoftwareModal } from '../../components/admin/AddSoftwareModal';
+import AddSoftwareModal from '../../components/admin/AddSoftwareModal';
 import { useAdmin } from '../../contexts/AdminContext';
 import { 
   Plus, 
